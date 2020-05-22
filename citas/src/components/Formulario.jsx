@@ -1,110 +1,122 @@
-import React, {Fragment, useState} from 'react'
+import React, { Fragment, useState } from "react";
+import uuid from "uuid/dist/v4";
 
-const Formulario = () => {
+const Formulario = ({ crearCita }) => {
+	//Crear State de Citas
+	const [cita, actualizarCita] = useState({
+		mascota: "",
+		propietario: "",
+		fecha: "",
+		hora: "",
+		sintomas: "",
+	});
 
-    //Crear State de Citas
-    const [cita, actualizarCita] = useState({
-        mascota: '',
-        propietario: '',
-        fecha: '',
-        hora: '',
-        sintomas: ''
-    })
+	const actualizarState = (e) => {
+		actualizarCita({
+			...cita,
+			[e.target.name]: e.target.value,
+		});
+	};
 
-    const actualizarState = (e) =>{
-        actualizarCita({
-            ...cita,
-            [e.target.name] : e.target.value
-        })
-	}
-	
-	const [error, actualizarError] = useState(false)
+	const [error, actualizarError] = useState(false);
 
-    //Extraigo los valores
-    const {mascota, propietario, fecha, hora, sintomas} = cita
+	//Extraigo los valores
+	const { mascota, propietario, fecha, hora, sintomas } = cita;
 
-    const submitCita = (e) => {
-        e.preventDefault();
+	const submitCita = (e) => {
+		e.preventDefault();
 
 		//Validar
-		if (mascota.trim() === '' || propietario.trim() === '' || fecha.trim() === '' || hora.trim() === '' || sintomas.trim() === '') {
-			actualizarError(true)
+		if (
+			mascota.trim() === "" ||
+			propietario.trim() === "" ||
+			fecha.trim() === "" ||
+			hora.trim() === "" ||
+			sintomas.trim() === ""
+		) {
+			actualizarError(true);
 			return;
 		}
 
-        //Asignar ID
+		actualizarError(false);
 
-        //Crear cita
+		//Asignar ID
+		cita.id = uuid();
 
-        //Reset form
+		//Crear cita
+		crearCita(cita);
 
-    }
+		//Reset form
+		actualizarCita({
+			mascota: "",
+			propietario: "",
+			fecha: "",
+			hora: "",
+			sintomas: "",
+		});
+	};
 
-    return (
-			<Fragment>
-				<h2>Crear Cita</h2>
+	return (
+		<Fragment>
+			<h2>Crear Cita</h2>
 
-				{error
-					? <p className="alerta-error">Todos los campos son obligatorios</p>
-					: null	
-				}
+			{error ? (
+				<p className="alerta-error">Todos los campos son obligatorios</p>
+			) : null}
 
-				<form onSubmit={submitCita}>
-					<label>Nombre Mascota</label>
-					<input
-						type="text"
-						name="mascota"
-						className="u-full-width"
-						placeholder="Nombre mascota"
-						onChange={actualizarState}
-						value={mascota}
-					/>
+			<form onSubmit={submitCita}>
+				<label>Nombre Mascota</label>
+				<input
+					type="text"
+					name="mascota"
+					className="u-full-width"
+					placeholder="Nombre mascota"
+					onChange={actualizarState}
+					value={mascota}
+				/>
 
-					<label>Nombre Dueño</label>
-					<input
-						type="text"
-						name="propietario"
-						className="u-full-width"
-						placeholder="Nombre propietario"
-						onChange={actualizarState}
-						value={propietario}
-					/>
+				<label>Nombre Dueño</label>
+				<input
+					type="text"
+					name="propietario"
+					className="u-full-width"
+					placeholder="Nombre propietario"
+					onChange={actualizarState}
+					value={propietario}
+				/>
 
-					<label>Fecha</label>
-					<input
-						type="date"
-						name="fecha"
-						className="u-full-width"
-						onChange={actualizarState}
-						value={fecha}
-					/>
+				<label>Fecha</label>
+				<input
+					type="date"
+					name="fecha"
+					className="u-full-width"
+					onChange={actualizarState}
+					value={fecha}
+				/>
 
-					<label>Hora</label>
-					<input
-						type="time"
-						name="hora"
-						className="u-full-width"
-						onChange={actualizarState}
-						value={hora}
-					/>
+				<label>Hora</label>
+				<input
+					type="time"
+					name="hora"
+					className="u-full-width"
+					onChange={actualizarState}
+					value={hora}
+				/>
 
-					<label>Síntomas</label>
-					<textarea
-						className="u-full-width"
-						name="sintomas"
-						onChange={actualizarState}
-						value={sintomas}
-					></textarea>
+				<label>Síntomas</label>
+				<textarea
+					className="u-full-width"
+					name="sintomas"
+					onChange={actualizarState}
+					value={sintomas}
+				></textarea>
 
-                    <button 
-                        type="submit" 
-                        className="u-full-width button-primary"
-                        >
-						Agregar Cita
-					</button>
-				</form>
-			</Fragment>
-		);
-}
+				<button type="submit" className="u-full-width button-primary">
+					Agregar Cita
+				</button>
+			</form>
+		</Fragment>
+	);
+};
 
-export default Formulario
+export default Formulario;
