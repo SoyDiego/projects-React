@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import Pregunta from "./components/Pregunta";
 
 function App() {
+
 	return (
 		<div className="container">
 			<header>
