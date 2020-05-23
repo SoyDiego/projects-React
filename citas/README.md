@@ -2,7 +2,7 @@
 
 Demo: https://administrador-citas-reactjs.netlify.app/
 
-![Screenshot][https://i.imgur.com/s938MCa.png]
+![Screenshot](https://i.imgur.com/s938MCa.png)
 
 ## Available Scripts
 
