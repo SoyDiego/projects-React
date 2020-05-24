@@ -1,34 +1,47 @@
-import React, {useState} from 'react';
-import Header from './components/Header'
+import React, { useState } from "react";
+import Header from "./components/Header";
 import Formulario from "./components/Formulario";
+import Resumen from "./components/Resumen";
+import Resultado from "./components/Resultado";
 import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-`
+	max-width: 600px;
+	margin: 0 auto;
+`;
 
 const ContenedorFormulario = styled.div`
-  background-color: #FFF;
-  padding: 3rem;
+	background-color: #fff;
+	padding: 3rem;
 `;
 
 function App() {
-  const [resumen, guardarResumen] = useState({})
+	const [resumen, guardarResumen] = useState({
+		cotizacion: 0,
+		datos: {
+			marca: "",
+			year: "",
+			plan: "",
+		},
+	});
 
-  return (
-    <Contenedor>
-      <Header 
-        titulo="Cotizador de Seguros"
-      />
+	const {cotizacion, datos } = resumen;
 
-      <ContenedorFormulario>
-          <Formulario
-            guardarResumen={guardarResumen}
-          />
-      </ContenedorFormulario>
-    </Contenedor>
-  );
+	return (
+		<Contenedor>
+			<Header titulo="Cotizador de Seguros" />
+
+			<ContenedorFormulario>
+
+				<Formulario guardarResumen={guardarResumen} />
+
+				<Resumen datos={datos} />
+
+				<Resultado cotizacion={cotizacion} />
+
+			</ContenedorFormulario>
+		</Contenedor>
+	);
 }
 
 export default App;
