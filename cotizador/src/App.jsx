@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import Header from "./components/Header";
 import Formulario from "./components/Formulario";
 import Resumen from "./components/Resumen";
@@ -24,31 +24,31 @@ function App() {
 			year: "",
 			plan: "",
 		},
-  });
-  
-  const [cargando, guardarCargando] = useState(false)
+	});
 
-  //extraer Datos
-	const {cotizacion, datos } = resumen;
+	const [cargando, guardarCargando] = useState(false);
+
+	//extraer Datos
+	const { cotizacion, datos } = resumen;
 
 	return (
 		<Contenedor>
 			<Header titulo="Cotizador de Seguros" />
 
 			<ContenedorFormulario>
+				<Formulario
+					guardarResumen={guardarResumen}
+					guardarCargando={guardarCargando}
+				/>
 
-				<Formulario guardarResumen={guardarResumen} guardarCargando={guardarCargando}/>
+				{cargando ? <Spinner /> : null}
 
-        {cargando ? <Spinner/> : null }
-        
-
-				<Resumen datos={datos} />
-
-        {!cargando 
-          ? <Resultado cotizacion={cotizacion} /> 
-          : null
-        }
-
+				{!cargando ? (
+					<Fragment>
+						<Resumen datos={datos} />
+						<Resultado cotizacion={cotizacion} />
+					</Fragment>
+				) : null}
 			</ContenedorFormulario>
 		</Contenedor>
 	);
