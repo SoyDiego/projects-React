@@ -1,8 +1,8 @@
 # Cotizador de Seguros
 
-<!-- Demo: https://control-presupuesto-reactjs.netlify.app/ -->
+Demo: https://cotizador-seguros-reactjs.netlify.app/
 
-<!-- ![Screenshot](https://i.imgur.com/T1SwRQz.png) -->
+![Screenshot](https://i.imgur.com/j8k4LCo.png)
 
 ## Available Scripts
 
