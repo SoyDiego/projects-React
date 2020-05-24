@@ -1,122 +1,124 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
-import {obtenerDiferenciaYear, calcularMarca, obtenerPlan} from '../helper'
+import { obtenerDiferenciaYear, calcularMarca, obtenerPlan } from "../helper";
 
 const Campo = styled.div`
-    display: flex;
-    margin-bottom: 1rem;
-    align-items: center;
-`
+	display: flex;
+	margin-bottom: 1rem;
+	align-items: center;
+`;
 
 const Label = styled.label`
-    flex: 0 0 100px;
-`
+	flex: 0 0 100px;
+`;
 
 const Select = styled.select`
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid #e1e1e1;
-    -webkit-appearance: none;
-`
+	display: block;
+	width: 100%;
+	padding: 1rem;
+	border: 1px solid #e1e1e1;
+	-webkit-appearance: none;
+`;
 
 const InputRadio = styled.input`
-    margin: 0 1rem;
-`
+	margin: 0 1rem;
+`;
 
 const Boton = styled.button`
-    background-color: #00838F;
-    font-size: 16px;
-    width: 100%;
-    padding: 1rem;
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    transition: background-color .5s ease;
-    margin-top: 2rem;
+	background-color: #00838f;
+	font-size: 16px;
+	width: 100%;
+	padding: 1rem;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-weight: bold;
+	border: none;
+	transition: background-color 0.5s ease;
+	margin-top: 2rem;
 
-    &:hover{
-        cursor: pointer;
-        background-color: #26c6da;
-    }
-`
+	&:hover {
+		cursor: pointer;
+		background-color: #26c6da;
+	}
+`;
 
 const Error = styled.div`
-    background-color: red;
-    color: white;
-    padding: 1rem;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 2rem;
-`
+	background-color: red;
+	color: white;
+	padding: 1rem;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 2rem;
+`;
 
-const Formulario = ({guardarResumen}) => {
+const Formulario = ({ guardarResumen, guardarCargando }) => {
+	const [datos, guardarDatos] = useState({
+		marca: "",
+		year: "",
+		plan: "",
+	});
 
-    const [datos, guardarDatos] = useState({
-        marca: '',
-        year: '',
-        plan: ''
+	const [error, guardarError] = useState(false);
 
-    })
+	const { marca, year, plan } = datos;
 
-    const [error, guardarError] = useState(false)
+	const obtenerInformacion = (e) => {
+		guardarDatos({
+			...datos,
+			[e.target.name]: e.target.value,
+		});
+	};
 
-    const {marca, year, plan} = datos
+	//Cuando el usuario presiona submit
+	const cotizarSeguro = (e) => {
+		e.preventDefault();
 
-    const obtenerInformacion = e => {
-        guardarDatos({
-            ...datos,
-            [e.target.name] : e.target.value
-        })
-    }
+		if (marca.trim === "" || year.trim() === "" || plan.trim() === "") {
+			guardarError(true);
+			return;
+		}
 
-    //Cuando el usuario presiona submit
-    const cotizarSeguro = (e) => {
-        e.preventDefault();
+		guardarError(false);
 
-        if (marca.trim === '' || year.trim() === '' || plan.trim() === '') {
-            guardarError(true)
-            return
-        }
+		//Una base de 2000
+		let resultado = 2000;
 
-        guardarError(false)
+		//obtener la diferencia de años
 
-        //Una base de 2000
-        let resultado = 2000;
+		const diferencia = obtenerDiferenciaYear(year);
 
-        //obtener la diferencia de años
+		//por cada hay que restar 3%
 
-        const diferencia = obtenerDiferenciaYear(year)       
+		resultado -= (diferencia * 3 * resultado) / 100;
 
-        //por cada hay que restar 3%
+		//Americano 15%
+		//Asiatico 5%
+		//Europeo 30%
 
-        resultado -=((diferencia * 3) * resultado) / 100
+		resultado = calcularMarca(marca) * resultado;
 
-        //Americano 15%
-        //Asiatico 5%
-        //Europeo 30%
+		//Basico aumenta 20%
+		//Completo 50%
+		const incrementoPlan = obtenerPlan(plan);
 
-        resultado = calcularMarca(marca) * resultado
+		resultado = parseFloat(incrementoPlan * resultado).toFixed(2);
 
-        //Basico aumenta 20%
-        //Completo 50%
-        const incrementoPlan = obtenerPlan(plan)
+        guardarCargando(true);
         
-        resultado = parseFloat(incrementoPlan * resultado).toFixed(2)
-        console.log(resultado)
-
-        //Total
-        guardarResumen({
-            cotizacion: resultado,
-            datos,
-        })
-    }
+		setTimeout(() => {
+            guardarCargando(false);
+            
+			//Total
+			guardarResumen({
+				cotizacion: resultado,
+				datos,
+			});
+		}, 3000);
+	};
 
 	return (
 		<form onSubmit={cotizarSeguro}>
-
-            {error ? <Error>Todos los campos son obligatorios</Error> : null}
+			{error ? <Error>Todos los campos son obligatorios</Error> : null}
 
 			<Campo>
 				<Label>Marca</Label>
