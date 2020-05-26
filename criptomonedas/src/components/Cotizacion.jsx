@@ -1,29 +1,48 @@
-import React from 'react'
+import React from "react";
+import styled from "@emotion/styled";
 
-const Cotizacion = ({resultado}) => {
-    if(Object.keys(resultado).length === 0) return null
+const ResultadoDiv = styled.div`
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+`;
+const Info = styled.p`
+	font-size: 18px;
 
-    console.log(resultado)
+	span {
+		font-weight: bold;
+	}
+`;
 
-    return (
-			<div>
-				<p>
-					El precio es: <span>{resultado.PRICE}</span>
-				</p>
-				<p>
-					El precio más alto del día: <span>{resultado.HIGHDAY}</span>
-				</p>
-				<p>
-					El precio más bajo del día: <span>{resultado.LOWDAY}</span>
-				</p>
-				<p>
-					Variaciónn últimas 24hs: <span>{resultado.CHANGEPCT24HOUR}</span>
-				</p>
-				<p>
-					Última actualización: <span>{resultado.LASTUPDATE}</span>
-				</p>
-			</div>
-		);
-}
+const Precio = styled.p`
+	font-size: 30px;
+    
+	span {
+		font-weight: bold;
+	}
+`;
 
-export default Cotizacion
+const Cotizacion = ({ resultado }) => {
+	if (Object.keys(resultado).length === 0) return null;
+
+	return (
+		<ResultadoDiv>
+			<Precio>
+				El precio es: <span>{resultado.PRICE}</span>
+			</Precio>
+			<Info>
+				El precio más alto del día: <span>{resultado.HIGHDAY}</span>
+			</Info>
+			<Info>
+				El precio más bajo del día: <span>{resultado.LOWDAY}</span>
+			</Info>
+			<Info>
+				Variaciónn últimas 24hs: <span>{resultado.CHANGEPCT24HOUR}</span>
+			</Info>
+			<Info>
+				Última actualización: <span>{resultado.LASTUPDATE}</span>
+			</Info>
+		</ResultadoDiv>
+	);
+};
+
+export default Cotizacion;
