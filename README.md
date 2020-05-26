@@ -1,6 +1,6 @@
 # Projects REACTJS
 
-This repo contain all my projects and code while i learn **React JS** following the course:
+This repo contain all my projects and code while i learn **React JS** following the course:  
 [React - La Guía Completa: Hooks Context Redux MERN +15 Apps](https://www.udemy.com/course/react-de-principiante-a-experto-creando-mas-de-10-aplicaciones/).
 
 ## 1 - Citas
@@ -34,8 +34,6 @@ Demo: https://el-tiempo-reactjs.netlify.app/
 ![Screenshot](https://i.imgur.com/twM1n7m.png)
 
 ## 6 - Cotizador de Criptomonedas
-
-# Cotización de Criptomonedas
 
 Demo: https://cotizar-criptomonedas-reactjs.netlify.app/
 
