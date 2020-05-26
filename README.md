@@ -26,6 +26,12 @@ Demo: https://frases-api-reactjs.netlify.app/
 
 ![Screenshot](https://i.imgur.com/8CDbkUL.png)
 
+## 5 - Clima
+
+Demo: https://el-tiempo-reactjs.netlify.app/
+
+![Screenshot](https://i.imgur.com/twM1n7m.png)
+
 More soon...
 
 
