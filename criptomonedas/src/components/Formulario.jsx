@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "@emotion/styled";
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
 import Error from './Error'
 //Hooks personalizados
@@ -80,5 +81,10 @@ const Formulario = ({guardarMoneda, guardarCriptomoneda}) => {
 		</form>
 	);
 };
+
+Formulario.propTypes = {
+    guardarMoneda: PropTypes.func.isRequired,
+    guardarCriptomoneda: PropTypes.func.isRequired
+}
 
 export default Formulario;
