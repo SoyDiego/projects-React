@@ -25,7 +25,7 @@ const Boton = styled.input`
 	}
 `;
 
-const Formulario = () => {
+const Formulario = ({guardarMoneda, guardarCriptomoneda}) => {
 
     //State del listado de criptomonedas
     const [listacripto, guardarCriptomonedas] = useState([])
@@ -64,12 +64,15 @@ const Formulario = () => {
             return;
         }
         guardarError(false);
+        guardarMoneda(moneda)
+        guardarCriptomoneda(criptomoneda)
     }
 
 	return (
 		<form onSubmit={cotizarMoneda}>
 
             {error && <Error mensaje='Todos los campos son obligatorios'/>}
+
 			<SelectMonedas />
             <SelectCripto />
 
