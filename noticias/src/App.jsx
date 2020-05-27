@@ -7,7 +7,7 @@ function App() {
     <Fragment>
       <Header titulo="Buscador de Noticias"/>
 
-    <div class="container white">
+    <div className="container white">
       <Formulario/>
     </div>
 
