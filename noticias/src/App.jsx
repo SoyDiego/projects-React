@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Header from './components/Header'
 import Formulario from "./components/Formulario";
-require("dotenv").config();
+import ListadoNoticias from "./components/ListadoNoticias"
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
 	const API_KEY = process.env.REACT_APP_API_KEY;
 	  (async() => {
-		  const url = `http://newsapi.org/v2/top-headlines?country=ar&category=${categoria}&apiKey=${API_KEY}`;
+		  const url = `https://newsapi.org/v2/top-headlines?country=ar&category=${categoria}&apiKey=${API_KEY}`;
 		  const respuesta = await fetch(url);
 		  const noticias = await respuesta.json()
 
@@ -28,9 +28,9 @@ function App() {
 	  <Formulario
 		guardarCategoria={guardarCategoria}
 	  />
+
+	  <ListadoNoticias noticias={noticias}/>
 	</div>
-
-
 
 	</Fragment>
   );
