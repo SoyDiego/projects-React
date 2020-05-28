@@ -50,6 +50,16 @@ For use, you will get an API KEY from [this website](https://newsapi.org/registe
 
 ![Screenshot](https://i.imgur.com/OHslanS.png)
 
+## 8 - Buscador de Imágenes PIXABAY
+
+Demo: https://buscar-imagenes-reactjs.netlify.app/  
+
+For use, you will get an API KEY from [this website](https://pixabay.com/es/service/about/api/). Then create a `.env` file in your root directory with the next code:  
+
+`REACT_APP_API_KEY = "YOUR APIKEY HERE"`
+
+![Screenshot](https://i.imgur.com/uS9l9W2.png)
+
 More soon...
 
 
