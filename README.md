@@ -1,4 +1,4 @@
-# Projects REACTJS
+# Projects ReactJS
 
 This repo contain all my projects and code while i learn **React JS** following the course:  
 [React - La Guía Completa: Hooks Context Redux MERN +15 Apps](https://www.udemy.com/course/react-de-principiante-a-experto-creando-mas-de-10-aplicaciones/).
@@ -66,7 +66,7 @@ Demo: https://buscar-letra-canciones-reactjs.netlify.app/
 
 ![Screenshot](https://i.imgur.com/DOKdiSO.png)
 
-## 10 - Buscador de Recetas de Bedidas
+## 10 - Buscador de Recetas de Bebidas
 
 Demo: https://recetas-bebidas-reactjs.netlify.app/  
 
