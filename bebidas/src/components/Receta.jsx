@@ -18,7 +18,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
 	paper: {
 		position: "absolute",
-		width: 600,
+		width: 400,
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing(2, 4, 3),
@@ -40,8 +40,28 @@ const Receta = ({ receta }) => {
 		setOpen(false);
 	};
 
-    const { informacion, guardarIdReceta, guardarReceta } = useContext(ModalContext);
-    
+	const { informacion, guardarIdReceta, guardarReceta } = useContext(
+		ModalContext
+	);
+
+	//Muestra y formatea ingredientes
+
+	const mostrarIngredientes = (informacion) => {
+		let ingredientes = [];
+		for (let index = 1; index < 16; index++) {
+			if (informacion[`strIngredient${index}`]) {
+				ingredientes.push(
+					<li>
+						{informacion[`strIngredient${index}`]}
+						{informacion[`strMeasure${index}`]}
+					</li>
+				);
+			}
+        }
+        
+        return ingredientes
+	};
+
 	return (
 		<div className="col-md-4 mb-3">
 			<div className="card">
@@ -64,26 +84,29 @@ const Receta = ({ receta }) => {
 						Ver Receta
 					</button>
 
+					<Modal
+						open={open}
+						onClose={() => {
+							guardarIdReceta(null);
+							guardarReceta({});
+							handleClose();
+						}}
+					>
+						<div style={modalStyle} className={classes.paper}>
+							<h2>{informacion.strDrink}</h2>
+							<h3 className="mt-4">Instrucciones</h3>
+							<p>{informacion.strInstructions}</p>
 
-                    <Modal 
-                        open={open}
-                        onClose={() =>{
-                            guardarIdReceta(null);
-                            guardarReceta({})
-                            handleClose();
-                        }}
-                    >
-                        <div style={modalStyle} className={classes.paper}>
-                            <h2>{informacion.strDrink}</h2>
-                            <h3 className="mt-4">Instrucciones</h3>
-                            <p>
-                                {informacion.strInstructions}
-                            </p>
+							<img
+								className="img-fluid my-4"
+								src={informacion.strDrinkThumb}
+								alt={informacion.strDrink}
+							/>
 
-                            <img className="img-fluid my-4" src={informacion.strDrinkThumb} alt={informacion.strDrink}/>
-                        </div>
-                    </Modal>
-
+							<h3>Ingredientes y cantidades</h3>
+							<ul>{mostrarIngredientes(informacion)}</ul>
+						</div>
+					</Modal>
 				</div>
 			</div>
 		</div>

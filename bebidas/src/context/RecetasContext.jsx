@@ -24,7 +24,7 @@ const RecetasProvider = (props) => {
 			guardarRecetas(resultado.data.drinks);
 		})();
         }
-	}, [busqueda]);
+	}, [busqueda, consultar, categoria, nombre]);
 
 	return (
 		<RecetasContext.Provider
