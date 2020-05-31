@@ -1,16 +1,18 @@
-import React from 'react'
+import React, {useContext} from "react";
+import proyectoContext from "../../context/proyectos/proyectoContext";
 
-const Proyecto = ({proyecto}) => {
-    return (
-        <li>
-            <button
-                type="button"
-                className="btn btn-blank"
-            >
-                {proyecto.nombre}
-            </button>
-        </li>
-    )
-}
+const Proyecto = ({ proyecto }) => {
+	// Obtener el state de proyectos
+	const proyectosContext = useContext(proyectoContext);
+	const { proyectoActual } = proyectosContext;
 
-export default Proyecto
+	return (
+		<li>
+			<button type="button" className="btn btn-blank" onClick={() => proyectoActual(proyecto.id)}>
+				{proyecto.nombre}
+			</button>
+		</li>
+	);
+};
+
+export default Proyecto;

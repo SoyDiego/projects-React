@@ -3,6 +3,8 @@ import {
 	OBTENER_PROYECTOS,
 	AGREGAR_PROYECTO,
 	VALIDAR_FORMULARIO,
+	PROYECTO_ACTUAL,
+    ELIMINAR_PROYECTO
 } from "../../types/index";
 
 export default (state, action) => {
@@ -21,13 +23,24 @@ export default (state, action) => {
 			return {
 				...state,
 				proyectos: [...state.proyectos, action.payload],
-                formulario: false,
-                errorFormulario: false
+				formulario: false,
+				errorFormulario: false,
 			};
 		case VALIDAR_FORMULARIO:
 			return {
 				...state,
-				errorFormulario: true
+				errorFormulario: true,
+			};
+		case PROYECTO_ACTUAL:
+			return {
+				...state,
+				proyecto: state.proyectos.filter(proyecto => proyecto.id === action.payload)
+			};
+		case ELIMINAR_PROYECTO:
+			return {
+				...state,
+                proyectos: state.proyectos.filter(proyecto2 => proyecto2.id !== action.payload),
+                proyecto: null
 			};
 		default:
 			return state;
