@@ -56,28 +56,51 @@ exports.actualizarProyecto = async (req, res) => {
 	}
 
 	try {
-
 		//Revisar el ID
-		let proyecto = await Proyecto.findById(req.params.id)
+		let proyecto = await Proyecto.findById(req.params.id);
 
 		//Si el proyecto existe o no
-		if(!proyecto){
-			return res.status(404).json({msg: 'Proyecto no encontrado'})
+		if (!proyecto) {
+			return res.status(404).json({ msg: "Proyecto no encontrado" });
 		}
 
 		//Verificar creador del proyecto
-		if(proyecto.creador.toString() !== req.usuario.id){
-			return res.status(401).json({msg: 'No Autorizado'})
+		if (proyecto.creador.toString() !== req.usuario.id) {
+			return res.status(401).json({ msg: "No Autorizado" });
 		}
 
 		//Actualizar
-		proyecto = await Proyecto.findByIdAndUpdate({_id: req.params.id}, {$set: nuevoProyecto}, {new: true })
+		proyecto = await Proyecto.findByIdAndUpdate({ _id: req.params.id }, { $set: nuevoProyecto }, { new: true });
 
-		res.json({proyecto})
-
-
+		res.json({ proyecto });
 	} catch (error) {
 		console.log(error);
+		return res.status(500).send("Error en el servidor");
+	}
+};
+
+//Eliminar un proyecto por su id
+exports.eliminarProyecto = async (req, res) => {
+	try {
+		//Revisar el ID
+		let proyecto = await Proyecto.findById(req.params.id);
+
+		//Si el proyecto existe o no
+		if (!proyecto) {
+			return res.status(404).json({ msg: "Proyecto no encontrado" });
+		}
+
+		//Verificar creador del proyecto
+		if (proyecto.creador.toString() !== req.usuario.id) {
+			return res.status(401).json({ msg: "No Autorizado" });
+		}
+
+		//Eliinar el proyecto
+		await Proyecto.findOneAndRemove({_id: req.params.id})
+		res.json({msg: 'Proyecto eliminado'})
+
+	} catch (error) {
+		console.log(error)
 		return res.status(500).send("Error en el servidor");
 	}
 };
