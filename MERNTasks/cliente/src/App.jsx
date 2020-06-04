@@ -5,6 +5,7 @@ import Proyectos from "./components/proyectos/Proyectos";
 
 import ProyectoState from "./context/proyectos/proyectoState";
 import TareaState from "./context/tareas/tareaState";
+import AlertaState from "./context/alertas/alertaState";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -12,17 +13,23 @@ function App() {
 	return (
 		<ProyectoState>
 			<TareaState>
-				<Router>
-					<Switch>
-						<Route exact path="/" component={Login} />
-						<Route
-							exact
-							path="/nueva-cuenta"
-							component={NuevaCuenta}
-						/>
-						<Route exact path="/proyectos" component={Proyectos} />
-					</Switch>
-				</Router>
+				<AlertaState>
+					<Router>
+						<Switch>
+							<Route exact path="/" component={Login} />
+							<Route
+								exact
+								path="/nueva-cuenta"
+								component={NuevaCuenta}
+							/>
+							<Route
+								exact
+								path="/proyectos"
+								component={Proyectos}
+							/>
+						</Switch>
+					</Router>
+				</AlertaState>
 			</TareaState>
 		</ProyectoState>
 	);
