@@ -7,14 +7,15 @@ import ProyectoState from "./context/proyectos/proyectoState";
 import TareaState from "./context/tareas/tareaState";
 import AlertaState from "./context/alertas/alertaState";
 import AuthState from "./context/autenticacion/authState";
-import tokenAuth from './config/token'
+import tokenAuth from "./config/token";
+import RutaPrivada from "./components/rutas/RutaPrivada";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 //Revisar si tenemos un token
-const token = localStorage.getItem('token')
+const token = localStorage.getItem("token");
 if (token) {
-	tokenAuth(token)
+	tokenAuth(token);
 }
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
 									path="/nueva-cuenta"
 									component={NuevaCuenta}
 								/>
-								<Route
+								<RutaPrivada
 									exact
 									path="/proyectos"
 									component={Proyectos}
