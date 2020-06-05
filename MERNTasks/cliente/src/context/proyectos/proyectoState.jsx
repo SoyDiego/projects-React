@@ -14,13 +14,6 @@ import {
 import clienteAxios from "../../config/axios";
 
 const ProyectoState = (props) => {
-	const proyectos = [
-		{ id: 1, nombre: "Tienda Virtual" },
-		{ id: 2, nombre: "Intranet" },
-		{ id: 3, nombre: "Diseño de Sitio Web" },
-		{ id: 4, nombre: "MERN" },
-	];
-
 	const initialState = {
 		proyectos: [],
 		formulario: false,
@@ -39,11 +32,16 @@ const ProyectoState = (props) => {
 	};
 
 	//Obtener los proyectos
-	const obtenerProyectos = () => {
-		dispatch({
-			type: OBTENER_PROYECTOS,
-			payload: proyectos,
-		});
+	const obtenerProyectos = async () => {
+		try {
+			const resultado = await clienteAxios.get("api/proyectos");
+			dispatch({
+				type: OBTENER_PROYECTOS,
+				payload: resultado.data.proyectos,
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	//Agregar nuevo proyecto
@@ -80,11 +78,18 @@ const ProyectoState = (props) => {
 	};
 
 	//Elimina un proyecto
-	const eliminarProyecto = (proyectoId) => {
-		dispatch({
-			type: ELIMINAR_PROYECTO,
-			payload: proyectoId,
-		});
+	const eliminarProyecto = async (proyectoId) => {
+		try {
+			const resultado = await clienteAxios.delete(
+				`/api/proyectos/${proyectoId}`
+			);
+			dispatch({
+				type: ELIMINAR_PROYECTO,
+				payload: proyectoId
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
