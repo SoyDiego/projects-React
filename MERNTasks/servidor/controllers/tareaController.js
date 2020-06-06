@@ -23,7 +23,7 @@ exports.crearTarea = async (req, res) => {
 		}
 
 		//Revisar si el proyecto actual pertenece al usuario autenticado
-		if (existeProyecto.creador.toString() !== req.usuario.id) {
+		if (existeProyecto.creador.toHexString() !== req.usuario.id) {
 			return res.status(401).json({
 				msg: "No Autorizado",
 			});
@@ -56,7 +56,7 @@ exports.obtenerTareas = async (req, res) => {
 		}
 
 		//Revisar si el proyecto actual pertenece al usuario autenticado
-		if (existeProyecto.creador.toString() !== req.usuario.id) {
+		if (existeProyecto.creador.toHexString() !== req.usuario.id) {
 			return res.status(401).json({
 				msg: "No Autorizado",
 			});

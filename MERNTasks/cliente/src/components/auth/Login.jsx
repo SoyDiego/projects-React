@@ -26,7 +26,7 @@ const Login = (props) => {
 
 	const [usuario, guardarUsuario] = useState({
 		email: "",
-		pasword: "",
+		password: "",
 	});
 
 	const { email, password } = usuario;

@@ -32,7 +32,6 @@ const TareaState = (props) => {
 			const resultado = await clienteAxios.get("/api/tareas", {
 				params: { proyecto },
 			});
-			console.log(resultado);
 			dispatch({
 				type: TAREAS_PROYECTO,
 				payload: resultado.data.tareas,
@@ -46,10 +45,10 @@ const TareaState = (props) => {
 
 	const agregarTarea = async (tarea) => {
 		try {
-			await clienteAxios.post("/api/tareas", tarea);
+			const resultado = await clienteAxios.post("/api/tareas", tarea);
 			dispatch({
 				type: AGREGAR_TAREA,
-				payload: tarea
+				payload: resultado.data.tarea
 			});
 		} catch (error) {
 			console.log(error);

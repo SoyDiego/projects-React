@@ -60,7 +60,6 @@ const ProyectoState = (props) => {
 				"/api/proyectos",
 				proyecto
 			);
-			console.log(resultado);
 			//Insertar el proyecto en el state
 			dispatch({
 				type: AGREGAR_PROYECTO,

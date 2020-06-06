@@ -78,7 +78,7 @@ const FormTarea = () => {
 		}
 
 		//Obtener y filtrar tareas del proyecto actual
-		obtenerTareas(proyectoActual.id);
+		obtenerTareas(proyectoActual._id);
 
 		//Reiniciar
 		guardarTarea({
