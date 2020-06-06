@@ -21,7 +21,8 @@ const Login = (props) => {
 		if (mensaje) {
 			mostrarAlerta(mensaje.msg, mensaje.categoria);
 		}
-	}, [mensaje, autenticado, props.history, mostrarAlerta]);
+		//eslint-disable-next-line
+	}, [mensaje, autenticado, props.history]);
 
 	const [usuario, guardarUsuario] = useState({
 		email: "",
@@ -71,7 +72,7 @@ const Login = (props) => {
 					</div>
 
 					<div className="campo-form">
-						<label htmlFor="email">Password:</label>
+						<label htmlFor="password">Password:</label>
 						<input
 							type="password"
 							id="password"

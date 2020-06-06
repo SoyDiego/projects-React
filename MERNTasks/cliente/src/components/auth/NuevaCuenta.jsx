@@ -18,9 +18,10 @@ const NuevaCuenta = (props) => {
 		}
 
 		if (mensaje) {
-			mostrarAlerta(mensaje.msg, mensaje.categoriah);
+			mostrarAlerta(mensaje.msg, mensaje.categoria);
 		}
-	}, [mensaje, autenticado, props.history, mostrarAlerta]);
+		//eslint-disable-next-line
+	}, [mensaje, autenticado, props.history]);
 
 	//State para iniciar sesion
 	const [usuario, guardarUsuario] = useState({
@@ -110,7 +111,7 @@ const NuevaCuenta = (props) => {
 					</div>
 
 					<div className="campo-form">
-						<label htmlFor="email">Password:</label>
+						<label htmlFor="password">Password:</label>
 						<input
 							type="password"
 							id="password"

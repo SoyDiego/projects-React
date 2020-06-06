@@ -39,10 +39,18 @@ export default (state, action) => {
 					(proyecto) => proyecto._id === action.payload
 				),
 			};
+		case ELIMINAR_PROYECTO:
+			return {
+				...state,
+				proyectos: state.proyectos.filter(
+					(proyecto) => proyecto._id !== action.payload
+				),
+				proyecto: null,
+			};
 		case PROYECTO_ERROR:
 			return {
 				...state,
-				mensaje: action.payload
+				mensaje: action.payload,
 			};
 
 		default:
