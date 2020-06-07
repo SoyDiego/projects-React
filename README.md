@@ -74,8 +74,8 @@ Demo: https://recetas-bebidas-reactjs.netlify.app/
 
 ## 11 - MERN Tasks
 
-Doing now...
+Demo: https://mern-tasks-reactjs.netlify.app/
+
+![Screenshot](https://i.imgur.com/7ar1FQQ.png)
 
 More soon...
-
-
