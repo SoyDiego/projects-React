@@ -34,6 +34,16 @@
       "nombre": "555",
       "precio": 555,
       "id": 7
+    },
+    {
+      "nombre": "asdfg",
+      "precio": 1234,
+      "id": 8
+    },
+    {
+      "nombre": "555",
+      "precio": 5555,
+      "id": 9
     }
   ]
 }

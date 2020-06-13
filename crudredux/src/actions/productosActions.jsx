@@ -4,41 +4,57 @@ import {
 	AGREGAR_PRODUCTO_ERROR,
 } from "../types/";
 
-import clienteAxios from '../config/axios'
+import clienteAxios from "../config/axios";
+import Swal from "sweetalert2";
 
 // Crear nuevos productos
-export function crearNuevoProductoAction(producto){
-    return async(dispatch) =>{
-        dispatch(agregarProducto())
+export function crearNuevoProductoAction(producto) {
+	return async (dispatch) => {
+		dispatch(agregarProducto());
 
-        try {
-            //Insertar en la API
-            await clienteAxios.post('/asd', producto)
+		try {
+			//Insertar en la API
+			await clienteAxios.post("/productos", producto);
 
-            //Si todo sale bien, actualiza el state.
-            dispatch( agregarProductoExito(producto) )
-        } catch (error) {
-            console.log(error)
-            //Si hay un error, cambiar el state.
-            dispatch(agregarProductoError(true));
-        }
-    }
+			//Si todo sale bien, actualiza el state.
+			dispatch(agregarProductoExito(producto));
 
+			//Alerta OK
+			Swal.fire(
+				"Correcto",
+				"El producto se agregó correctamente.",
+				"success"
+			);
+		} catch (error) {
+			console.log(error);
+			//Si hay un error, cambiar el state.
+			dispatch(agregarProductoError(true));
+
+			//Alerta ERROR
+			Swal.fire(
+				{
+                    icon: 'error',
+                    title: 'Hubo un error.',
+                    text: 'Hubo un error, intenta de nuevo.'
+                }
+			);
+		}
+	};
 }
 
 const agregarProducto = () => ({
-    type: AGREGAR_PRODUCTO,
-    payload: true
-})
+	type: AGREGAR_PRODUCTO,
+	payload: true,
+});
 
 //Si el producto se guarda en la BD
-const agregarProductoExito = producto => ({
-    type: AGREGAR_PRODUCTO_EXITO,
-    payload: producto
-})
+const agregarProductoExito = (producto) => ({
+	type: AGREGAR_PRODUCTO_EXITO,
+	payload: producto,
+});
 
 //Si hubo un error
 const agregarProductoError = (estado) => ({
-    type: AGREGAR_PRODUCTO_ERROR,
-    payload: estado
-})
+	type: AGREGAR_PRODUCTO_ERROR,
+	payload: estado,
+});
