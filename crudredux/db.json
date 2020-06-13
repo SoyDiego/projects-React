@@ -14,36 +14,6 @@
       "nombre": "Jugo de Naranja",
       "precio": "300",
       "id": 3
-    },
-    {
-      "nombre": "Rib Eye 800g",
-      "precio": "200",
-      "id": 4
-    },
-    {
-      "nombre": "Jugo de Fresa",
-      "precio": "200",
-      "id": 5
-    },
-    {
-      "nombre": "Rib Eye 1Kg",
-      "precio": 800,
-      "id": 6
-    },
-    {
-      "nombre": "555",
-      "precio": 555,
-      "id": 7
-    },
-    {
-      "nombre": "asdfg",
-      "precio": 1234,
-      "id": 8
-    },
-    {
-      "nombre": "555",
-      "precio": 5555,
-      "id": 9
     }
   ]
 }
