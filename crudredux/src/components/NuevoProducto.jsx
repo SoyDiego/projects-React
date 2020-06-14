@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 //Actions de Redux
 import { crearNuevoProductoAction } from "../actions/productosActions.jsx";
+import { mostrarAlerta, ocultarAlerta } from "../actions/alertaActions.jsx";
 
-const NuevoProducto = ({history}) => {
+const NuevoProducto = ({ history }) => {
 	//State del componente
 	const [nombre, guardarNombre] = useState("");
 	const [precio, guardarPrecio] = useState(0);
@@ -13,31 +14,40 @@ const NuevoProducto = ({history}) => {
 	const dispatch = useDispatch();
 
 	// Acceder al state del store
-	const cargando = useSelector( (state) => state.productos.loading )
-	const error = useSelector( (state) => state.productos.error)
+	const cargando = useSelector((state) => state.productos.loading);
+	const error = useSelector((state) => state.productos.error);
+	const alerta = useSelector((state) => state.alerta.alerta);
 
 	// Mandar a llamar el action de productoAction
-	const agregarProducto = producto => dispatch(crearNuevoProductoAction(producto));
+	const agregarProducto = (producto) =>
+		dispatch(crearNuevoProductoAction(producto));
 
 	//Cuando el usuario haga submit
 	const submitNuevoProducto = (e) => {
 		e.preventDefault();
 
 		//Validar form
-		if (nombre.trim() === '' || precio <= 0) {
-			return
+		if (nombre.trim() === "" || precio <= 0) {
+			const alerta = {
+				msg: "Ambos campos obligatorios",
+				classes: "alert alert-danger text-center text-uppercase p3",
+			};
+
+			dispatch(mostrarAlerta(alerta));
+			return;
 		}
 
 		//Si no hay errores
+		dispatch(ocultarAlerta());
 
 		//Crear nuevo producto
 		agregarProducto({
 			nombre,
-			precio
+			precio,
 		});
 
 		//Redireccionar
-		history.push('/')
+		history.push("/");
 	};
 
 	return (
@@ -49,6 +59,11 @@ const NuevoProducto = ({history}) => {
 							Agregar Nuevo Producto
 						</h2>
 
+						{alerta && (
+							<p className={alerta.classes}>
+								{alerta.msg}
+							</p>
+						)}
 						<form onSubmit={submitNuevoProducto}>
 							<div className="form-group">
 								<label>Nombre Producto</label>
@@ -85,7 +100,11 @@ const NuevoProducto = ({history}) => {
 							</button>
 						</form>
 						{cargando && <p>Cargando...</p>}
-						{error && <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p>}
+						{error && (
+							<p className="alert alert-danger p2 mt-4 text-center">
+								Hubo un error
+							</p>
+						)}
 					</div>
 				</div>
 			</div>
