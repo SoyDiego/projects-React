@@ -78,4 +78,10 @@ Demo: https://mern-tasks-reactjs.netlify.app/
 
 ![Screenshot](https://i.imgur.com/7ar1FQQ.png)
 
+## 12 - CRUD - React, Redux, REST API & Axios
+
+Demo: https://crud-reactjs-redux.netlify.app/
+
+![Screenshot](https://i.imgur.com/dtJSP9O.png)
+
 More soon...
