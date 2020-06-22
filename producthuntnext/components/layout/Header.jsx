@@ -1,30 +1,34 @@
 import React from "react";
-import Buscar from "../ui/Buscar";
-import Navegacion from "./Navegacion";
-import Link from 'next/link'
+import Link from "next/link";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
+import Buscar from "../ui/Buscar";
+import Boton from "../ui/Boton";
+import Navegacion from "./Navegacion";
 
 const ContenedorHeader = styled.div`
 	max-width: 1200px;
 	width: 95%;
 	margin: 0 auto;
-	@media (min-width: 768px){
+	@media (min-width: 768px) {
 		display: flex;
-		justify-content: space-between
+		justify-content: space-between;
 	}
-`
+`;
 
 const Logo = styled.p`
 	color: var(--naranja);
 	font-size: 4rem;
 	line-height: 0;
 	font-weight: 700;
-	font-family: 'Roboto Slab', serif;
+	font-family: "Roboto Slab", serif;
 	margin-right: 2rem;
-`
+	cursor: pointer;
+`;
 
 const Header = () => {
+	const usuario = false;
+
 	return (
 		<header
 			css={css`
@@ -32,22 +36,44 @@ const Header = () => {
 				padding: 1rem 0;
 			`}>
 			<ContenedorHeader>
-				<div>
+				<div
+					css={css`
+						display: flex;
+						align-items: center;
+					`}>
 					<Link href="/">
 						<Logo>P</Logo>
-					 </Link>
+					</Link>
 
 					<Buscar />
 
 					<Navegacion />
 				</div>
-
-				<div>
-					<p>Hola: Diego</p>
-					<button type="button">Cerrar Sesión</button>
-
-					<Link href="/">Login</Link>
-					<Link href="/">Crear Cuenta</Link>
+				<div
+					css={css`
+						display: flex;
+						align-items: center;
+					`}>
+					{usuario ? (
+						<>
+							<p
+								css={css`
+									margin-right: 2rem;
+								`}>
+								Hola: Diego
+							</p>
+							<Boton bgColor="true">Cerrar Sesión</Boton>
+						</>
+					) : (
+						<>
+							<Link href="/login">
+								<Boton bgColor="true">Login</Boton>
+							</Link>
+							<Link href="/crear-cuenta">
+								<Boton>Crear Cuenta</Boton>
+							</Link>
+						</>
+					)}
 				</div>
 			</ContenedorHeader>
 		</header>
