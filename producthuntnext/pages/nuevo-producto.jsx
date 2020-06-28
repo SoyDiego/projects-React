@@ -71,6 +71,7 @@ const NuevoProducto = () => {
 				id: usuario.uid,
 				nombre: usuario.displayName,
 			},
+			haVotado: []
 		};
 
 		//Insertarlo en la BD
@@ -127,7 +128,7 @@ const NuevoProducto = () => {
 									<input
 										type="text"
 										id="nombre"
-										placeholder="Tu Nombre"
+										placeholder="Nombre del Producto"
 										name="nombre"
 										value={nombre}
 										onChange={handleChange}

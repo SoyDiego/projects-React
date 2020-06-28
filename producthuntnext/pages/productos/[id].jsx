@@ -47,7 +47,7 @@ const Producto = () => {
 				}
 			})();
 		}
-	}, [id]);
+	}, [id, producto]);
 
 	if (Object.keys(producto).length === 0) return "Cargando...";
 
@@ -61,7 +61,36 @@ const Producto = () => {
 		urlImagen,
 		votos,
 		creador,
+		haVotado,
 	} = producto;
+
+	//Administrar y validar los votos
+	const votarProducto = () => {
+		if (!usuario) {
+			return router.push("/login");
+		}
+
+		//Obtener y sumar un nuevo voto.
+		const nuevoTotal = votos + 1;
+
+		//Verificar si el usuario ha votado
+		if (haVotado.includes(usuario.uid)) return;
+
+		//Guardar el id del usuario que ha votado
+		const nuevoHaVotado = [...haVotado, usuario.uid];
+
+		//Actualizar en la BD
+		firebase.db
+			.collection("productos")
+			.doc(id)
+			.update({ votos: nuevoTotal, haVotado: nuevoHaVotado });
+
+		//Actualizar en STATE
+		guardarProducto({
+			...producto,
+			votos: nuevoTotal,
+		});
+	};
 
 	return (
 		<Layout>
@@ -139,7 +168,9 @@ const Producto = () => {
 									{votos} Votos
 								</p>
 
-								{usuario && <Boton>Votar</Boton>}
+								{usuario && (
+									<Boton onClick={votarProducto}>Votar</Boton>
+								)}
 							</div>
 						</aside>
 					</ContenedorProducto>
