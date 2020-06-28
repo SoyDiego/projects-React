@@ -60,6 +60,7 @@ const Producto = () => {
 		url,
 		urlImagen,
 		votos,
+		creador,
 	} = producto;
 
 	return (
@@ -83,6 +84,9 @@ const Producto = () => {
 								{formatDistanceToNow(new Date(creado), {
 									locale: es,
 								})}
+							</p>
+							<p>
+								Por: {creador.nombre} de {empresa}{" "}
 							</p>
 							<img src={urlImagen} alt="Imagen Producto" />
 							<p>{descripcion}</p>
