@@ -166,7 +166,7 @@ const Producto = () => {
 			await firebase.db.collection("productos").doc(id).delete();
 			router.push("/");
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	};
 
@@ -188,7 +188,7 @@ const Producto = () => {
 						<ContenedorProducto>
 							<div>
 								<p>
-									Publicado hace:
+									Publicado hace: {""}
 									{formatDistanceToNow(new Date(creado), {
 										locale: es,
 									})}
