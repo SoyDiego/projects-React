@@ -4,8 +4,8 @@ import Image from "gatsby-image"
 import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 
-const TextoInicio = styled.div`
-  padding-top: 4rem;
+const Contenido = styled.main`
+  padding: 4rem 0;
   max-width: 1200px;
   width: 95%;
   margin: 0 auto;
@@ -13,51 +13,56 @@ const TextoInicio = styled.div`
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 2rem;
+    column-gap: 3rem;
   }
 
   p {
     line-height: 2;
+    margin-top: 2rem;
   }
 `
 
-const ContenidoInicio = () => {
+const ContenidoNosotros = () => {
   const informacion = useStaticQuery(graphql`
     query {
-      allDatoCmsPagina(filter: { slug: { eq: "inicio" } }) {
+      allDatoCmsPagina(filter: { slug: { eq: "nosotros" } }) {
         nodes {
           titulo
           contenido
           imagen {
-            fluid {
+            fluid(maxWidth: 1200) {
               ...GatsbyDatoCmsFluid
             }
           }
+          slug
         }
       }
     }
   `)
 
-  const { titulo, contenido, imagen } = informacion.allDatoCmsPagina.nodes[0]
+  const {
+    titulo,
+    contenido,
+    imagen
+  } = informacion.allDatoCmsPagina.nodes[0]
 
   return (
     <>
       <h2
         css={css`
+          margin-top: 4rem;
           text-align: center;
           font-size: 4rem;
-          margin-top: 4rem;
         `}
       >
         {titulo}
       </h2>
-
-      <TextoInicio>
+      <Contenido>
         <p>{contenido}</p>
-        <Image fluid={imagen.fluid} alt="Imagen hotel" />
-      </TextoInicio>
+        <Image fluid={imagen.fluid} />
+      </Contenido>
     </>
   )
 }
 
-export default ContenidoInicio
+export default ContenidoNosotros
