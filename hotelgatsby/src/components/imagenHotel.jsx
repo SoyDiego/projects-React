@@ -33,7 +33,7 @@ const TextoImagen = styled.div`
   p {
     font-size: 2rem;
     @media (min-width: 992px) {
-      font-size: 2.6rem;
+      font-size: 2.6 rem;
     }
   }
 `
