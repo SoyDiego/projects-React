@@ -8,7 +8,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
   `)
-
+  
   //   console.log(resultado.data.allDatoCmsHabitacion.nodes)
 
   //Detectar errores
