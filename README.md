@@ -84,7 +84,6 @@ Demo: https://crud-reactjs-redux.netlify.app/
 
 ![Screenshot](https://i.imgur.com/dtJSP9O.png)
 
-
 ## 13 - ProductHunt - React, NextJS, Firebase
 
 ### Login
@@ -94,4 +93,10 @@ Demo: https://producthunt-reactjs.netlify.app/
 
 ![Screenshot](https://i.imgur.com/nURgrIy.png)
 
-More soon...
+## 14 - Hotel Gatsby - React, Gatsby, GraphQL
+
+Demo: https://hotel-gatsby-reactjs.netlify.app/
+
+![Screenshot](https://i.imgur.com/E6DrSjP.jpg)
+
+# END COURSE! :)
